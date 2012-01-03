@@ -8,6 +8,11 @@ is no set schedule for releases.
 
 --TODO--
 
+--0.10--
+
+   *	Requires LibSnert 1.75.8
+
+   !	Configure and build changes to reflect changes in libsnert.
 
 --0.9--
 
@@ -24,7 +29,7 @@ is no set schedule for releases.
    +	Requires LibSnert 1.63
 
   !!	filterMail() neglected to reset the maxBytesRcpt between messages.
-  
+
    !	Corrected RFC 3463 Enhanced Mail System Status Codes from 5.7.1
    	to 5.3.4.
 
@@ -61,7 +66,7 @@ is no set schedule for releases.
    !	filterClose(): remove reporting of "null workspace error",
 	which can occur when a client connection is rejected before or
 	by filterOpen().
-	
+
    !	Minor corrections for gcc -Wall warnings.
 
    !	Fixed smfAccessClient() argument bug.
@@ -69,7 +74,7 @@ is no set schedule for releases.
 --0.5.15--
 
   !!	Lets try this again...
-  
+
    !	Fix rejection message which cited the wrong maxBytes variable
    	in the response. Reported by Doron Shmaryahu.
 
@@ -78,7 +83,7 @@ is no set schedule for releases.
 
    !	Fix rejection message which cited the wrong maxBytes variable
    	in the response. Reported by Doron Shmaryahu.
-   	
+
    !	Allow for both upper and lower case unit specifiers, ie: 800k
    	and 800K should be the same. Reported by Doron Shmaryahu.
 
@@ -91,22 +96,22 @@ is no set schedule for releases.
 	But in theory you could be DoS for between 5 and 104 hours per
 	connection. If you want to change this then set in
 	sendmail.mc:
-	
+
 		define(`confTO_DATABLOCK',      `30m')
 		define(`confTO_COMMAND',        `5m')
-  	
+
 --0.4--
-  
+
    !	Fixed bug in selecting the max. message length to apply. The
    	choice is now based on the following precendence, from high
    	to low order:
-  
+
   	  a) max. value of all relevant milter-length-to:,
   	  b) milter-length-auth:,
   	  c) milter-length-from:,
   	  d) milter-length-connect:,
   	  e) unlimited
-  	  
+
    !	Replaced use of LIBSNERT_WITH_BERKELEY_DB by HAVE_DB_H due to
    	changes in LibSnert/1.59.
 
@@ -115,28 +120,28 @@ is no set schedule for releases.
    +	Requires LibSnert 1.57
 
    +	Added support for default max. message length:
-   
+
    		milter-length-connect:		RHS
    		milter-length-from:		RHS
-   		
-   	Requested by Michael Long.
-   	
-   +	Added support for 
-   
-   		milter-length-auth:authid	RHS
-   		milter-length-auth:		RHS
-   	
+
    	Requested by Michael Long.
 
-   +	Added support for 
-   
+   +	Added support for
+
+   		milter-length-auth:authid	RHS
+   		milter-length-auth:		RHS
+
+   	Requested by Michael Long.
+
+   +	Added support for
+
    		milter-length-to:recipient	RHS
    		milter-length-to:		RHS
-   
+
    	Requested by Sebastian Utz.
 
    +	Added host/IP to rejection message. Request by Michael Long.
-   	
+
 --0.2--
 
    +	Requires LibSnert 1.56

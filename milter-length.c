@@ -1,7 +1,7 @@
 /*
  * milter-length.c
  *
- * Copyright 2005, 2006 by Anthony Howe. All rights reserved.
+ * Copyright 2005, 2012 by Anthony Howe. All rights reserved.
  *
  * The following should be added to the sendmail.mc file:
  *
@@ -77,8 +77,8 @@
 #include <com/snert/lib/util/Text.h>
 #include <com/snert/lib/util/getopt.h>
 
-#if LIBSNERT_MAJOR < 1 || LIBSNERT_MINOR < 63
-# error "LibSnert/1.63 or better is required"
+#if LIBSNERT_MAJOR < 1 || LIBSNERT_MINOR < 75
+# error "LibSnert 1.75.8 or better is required"
 #endif
 
 #ifndef HAVE_DB_H
