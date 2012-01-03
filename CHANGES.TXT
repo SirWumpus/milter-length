@@ -1,0 +1,154 @@
+CHANGES
+-------
+
+The major number changes for such things as code rewrites, changes in
+syntax, and/or dramatic changes in functionality. The minor number
+changes for corrections, enhancements, etc. made to the code. There
+is no set schedule for releases.
+
+--TODO--
+
+
+--0.9--
+
+   !	Fixed possible off by one error for body chunks less than 20
+   	bytes. Reported by Ben Lentz.
+
+--0.8.22--
+
+   !	Document correction. Removed old Usage section that no longer
+   	applied. Reported by Ben Spencer.
+
+--0.8--
+
+   +	Requires LibSnert 1.63
+
+  !!	filterMail() neglected to reset the maxBytesRcpt between messages.
+  
+   !	Corrected RFC 3463 Enhanced Mail System Status Codes from 5.7.1
+   	to 5.3.4.
+
+  !!	filterBody(): Fixed obsecure bug when the message content is
+	less than 20 bytes long, adding a terminating NUL to the body
+	chunk for the trace log output actually overwrote off the end
+	of a dynamic buffer on some Linux systems causing the milter
+	to crash. Reported by Martin Lathoud.
+
+   +	access-db now supports socket-map, flat-file, and SQLite3
+	lookups in addition to Berkeley DB. The SQLite3 behaviour
+	can be disabled via LibSnert's ./configure script.
+
+--0.7--
+
+  !!	License 1.4 which provides additional details with regards to
+  	possible license controls used, the possibility of "phone
+  	home code" and its general contents, and related privacy
+  	statement.
+
+   +	Add check for filterOpen() got NULL socket address pointer passed to filterOpen()
+   	which inidicates an unsupported address type. The connection
+   	is simply accepted to bypass the milter.
+
+--0.6--
+
+   +	Requires LibSnert 1.61
+
+  !!	Complete replacement of option specification and no backwards.
+	compatibility. The newer format allows for better integration
+	of previously undocumented libsnert options and for the
+	inclusion of future enhancements.
+
+   !	filterClose(): remove reporting of "null workspace error",
+	which can occur when a client connection is rejected before or
+	by filterOpen().
+	
+   !	Minor corrections for gcc -Wall warnings.
+
+   !	Fixed smfAccessClient() argument bug.
+
+--0.5.15--
+
+  !!	Lets try this again...
+  
+   !	Fix rejection message which cited the wrong maxBytes variable
+   	in the response. Reported by Doron Shmaryahu.
+
+
+--0.5--
+
+   !	Fix rejection message which cited the wrong maxBytes variable
+   	in the response. Reported by Doron Shmaryahu.
+   	
+   !	Allow for both upper and lower case unit specifiers, ie: 800k
+   	and 800K should be the same. Reported by Doron Shmaryahu.
+
+   !	Reverted back to libmilter's default (7210s) timeout. This
+	should silence many of the reported sendmail to milter timeout
+	errors and/or broken connections caused by the milter timing
+	out sooner than sendmail does with the current SMTP client.
+	The sendmail defaults for each SMTP command and receiving the
+	message content is 1h each and so libmilter allows for 2h 10s.
+	But in theory you could be DoS for between 5 and 104 hours per
+	connection. If you want to change this then set in
+	sendmail.mc:
+	
+		define(`confTO_DATABLOCK',      `30m')
+		define(`confTO_COMMAND',        `5m')
+  	
+--0.4--
+  
+   !	Fixed bug in selecting the max. message length to apply. The
+   	choice is now based on the following precendence, from high
+   	to low order:
+  
+  	  a) max. value of all relevant milter-length-to:,
+  	  b) milter-length-auth:,
+  	  c) milter-length-from:,
+  	  d) milter-length-connect:,
+  	  e) unlimited
+  	  
+   !	Replaced use of LIBSNERT_WITH_BERKELEY_DB by HAVE_DB_H due to
+   	changes in LibSnert/1.59.
+
+--0.3--
+
+   +	Requires LibSnert 1.57
+
+   +	Added support for default max. message length:
+   
+   		milter-length-connect:		RHS
+   		milter-length-from:		RHS
+   		
+   	Requested by Michael Long.
+   	
+   +	Added support for 
+   
+   		milter-length-auth:authid	RHS
+   		milter-length-auth:		RHS
+   	
+   	Requested by Michael Long.
+
+   +	Added support for 
+   
+   		milter-length-to:recipient	RHS
+   		milter-length-to:		RHS
+   
+   	Requested by Sebastian Utz.
+
+   +	Added host/IP to rejection message. Request by Michael Long.
+   	
+--0.2--
+
+   +	Requires LibSnert 1.56
+
+   !	Changed install.sh.in to create /var/run/mitler/ directory
+   	owned by milter:milter and change the default PID_FILE and
+   	SOCKET_FILE paths. This provides better privelage/security
+   	separation since the milters run as milter:milter.
+
+--0.1--
+
+   +	Requires LibSnert 1.53
+
+
+
