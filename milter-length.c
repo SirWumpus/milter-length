@@ -182,7 +182,6 @@ filterOpen(SMFICTX *ctx, char *client_name, _SOCK_ADDR *raw_client_addr)
 	smfLog(SMF_LOG_TRACE, TAG_FORMAT "filterOpen(%lx, '%s', [%s])", TAG_ARGS, (long) ctx, client_name, data->client_addr);
 
 	data->line[0] = '\0';
-	data->work.replyLine[0] = '\0';
 	data->maxBytesConnection = ULONG_MAX;
 
 	if (smfi_setpriv(ctx, (void *) data) == MI_FAILURE) {
@@ -346,7 +345,7 @@ filterBody(SMFICTX *ctx, unsigned char *chunk, size_t size)
 	data->tally += size;
 
 	if (size == 0)
-		chunk = "";
+		chunk = (unsigned char *) "";
 	else if (size < 20)
 		chunk[--size] = '\0';
 
