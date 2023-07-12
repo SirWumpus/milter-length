@@ -25,6 +25,7 @@ install.sh
 config.log
 config.status
 configure.lineno
+configure~
 VERSION.TXT
 FILE.TXT
 
